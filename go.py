@@ -1,0 +1,11 @@
+import requests,json,urllib.parse
+names=['Joynery', 'It-Sauma OY', 'Sebbex Ab OY', 'Ab Availab OY', 'Ab24 OY', 'Aimian OY', 'Ajatelma Solutions OY', 'Aktual OY', 'Aldercode OY', 'Animore Consulting OY', 'Arigrafia OY', 'At-Turva OY', 'Behemouse OY', 'Bevitech OY', 'Biot OY', 'Birksoft Consulting OY', 'Bitguru OY', 'Clonet OY', 'Clunet OY', 'Coco Invest OY', 'Codeline OY', 'Cosmic Thing OY', 'Cradia OY', 'Datalatu OY', 'Dataprof OY', 'Datasignaali OY', 'DB Consulting OY', 'DD Tech OY', 'Debyte OY', 'Delome Digital OY', 'Develox OY', 'Digiskarppi OY', 'Digital Business Innovations 48 OY', 'Digitila Ventures OY', 'Digitoimisto Viisam OY', 'Dragdrop Solutions OY', 'Eino Tuominen OY', 'ELC Concept OY', 'Ennuro OY', 'Evetuuli OY', 'Eximia Software Consulting OY', 'Goop OY', 'Hakio Consulting OY', 'Hawage OY', 'Hetion OY', 'Hietitec OY', 'Hievanen & Lehikoinen OY', 'Hoppas Hoppas OY', 'ICT Jkankare OY', 'Ictteq OY', 'Ioe Finland OY', 'It-Taxi OY', 'It-Tekniikka JVL OY', 'Jadenik OY', 'Jerta Solutions OY', 'Joinas OY', 'Jousoft OY', 'Kipity OY', 'Konsultointi Tero Laine OY', 'Kummeli Group OY', 'Kummeli Group OY', 'Leasit OY', 'Liehka OY', 'Luomasto OY', 'Mainostoimisto Expy OY', 'Maroy OY', 'Matti-Mikro OY', 'Mediascope Agency OY', 'Micode OY', 'Mpck-Group OY', 'Nenla OY', 'Net-Forum OY', 'Neutral Consulting OY', 'NS Schneider OY', 'Nyton OY', 'Obeneo OY', 'Ohjelmointi Asko Rajamäki OY', 'Oripän Koneasema OY', 'OY', 'Oy Eften Ltd', 'Palmionet OY', 'Perfektio OY', 'Polar Saato OY', 'Prohod Consulting OY', 'Qdata OY', 'RCD Finland OY', 'Rento Innovations OY', 'Rontium OY', 'Simsala Team OY', 'Sinksi OY', 'Skymission Ab OY', 'Smok OY', 'Solinum OY', 'Sp-Suunnittelu OY', 'Teamware Plaza OY', 'Techelp OY', 'Thy Palvelut OY', 'Tietokumppani OY', 'Tovi Services OY', 'Triple-J Computers OY', 'Usap Tech OY', 'Valus OY', 'Variaabeli OY', 'Versoft OY', 'Vihra Holding OY', 'Virtucon OY', 'Weide OY']
+out=[]
+s=requests.Session()
+for n in names:
+ u='https://www.proff.fi/toimialahaku?q='+urllib.parse.quote(n,safe='')
+ try:
+  r=s.get(u,headers={'User-Agent':'Mozilla/5.0'},timeout=30)
+  out.append({'n':n,'status':r.status_code,'text':r.text[:300000]})
+ except Exception as e: out.append({'n':n,'error':str(e)})
+open('out.json','w').write(json.dumps(out))
